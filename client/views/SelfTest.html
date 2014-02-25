@@ -1,0 +1,175 @@
+<head>
+  <title>Your Voice</title>
+</head>
+
+<body>
+  <div id="mainlayout">
+    <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+          <ul class="nav navbar-nav">
+            <li><a href="" class="brand">Meteor.js</a></li>
+            <li><div id="mainPage"><a href=""><h4>HOME</h4></a></div></li>
+          </ul>
+          <div id="cUser" class="label label-info">{{currentUser.username}}</div>
+          {{>logout}}
+      </div>
+    </div>
+  </div>
+  {{>manage}}
+  <div id="container" class="container">
+    <hr/>
+    <footer>
+      <p><a href="http://www.cnblogs.com/struCoder">DZhang &copy; 2014</a></p>
+    </footer>
+  </div>
+  </div>
+
+</body>
+
+<template name="manage">
+   {{#if istologin}}
+     {{#if isErrorlogin}}
+          <div id = "errinfo" class="alert alert-error">{{errors}}</div>
+      {{/if}}
+    <div id="userloginmoudle">
+      <form class="form-horizontal">
+       <fieldset>
+          <legend>Login</legend>
+            <div id="login" class="control-group">
+              {{>Login}}
+            </div>
+        </fieldset>
+       </form>
+    </div>
+  {{else}}
+    {{#if istoregister}}
+    {{#if isError}}
+        <div id = "errinfo" class="alert alert-error">{{error}}</div>
+    {{/if}}
+    <div id="userregister" class="control-group">
+      <fieldset>
+        <legend>User Register</legend>
+          <form class="form-horizontal">
+           <div id="register" class="control-group">
+             {{>register}}
+            </div>
+          </form>
+      </fieldset>
+    </div>
+    {{else}}
+      {{>mainlayout}}
+    {{/if}}
+  {{/if}}
+</template>
+
+
+<template name="mainlayout">
+ <div class="hero-unit">
+    <h1>Welcome to "Your Voice"</h1>
+      <p>Here you can say words that you want to say and whole the word can see it!</p>
+        {{#if currentUser}}
+           {{>postMsg}}
+         {{else}}
+           <p>
+             <div id="tologin" class="btn btn-primary btn-large">Login</div>
+             <div id="toregister" class="btn btn-large">Register</div>
+            </p>
+        {{/if}}
+</div>
+
+<div id="msgplace" class="well center">
+  <div class="accordion" id="accordion">
+  {{#each msg}}
+    
+     <div class="accordion-group">
+      <div class="accordion-heading">
+        <h4 class="title">
+          <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#{{_id}}">
+            {{uname}}&nbsp;&nbsp;<strong>Says:</strong>
+            <blockquote class="pull-right"><small>{{sayTime.minute}}</small></blockquote>
+         </a>
+       </h4>
+      </div>
+         <div id="{{_id}}" class="accordion-body collapse">
+           <div class="accordion-inner">
+             {{messages}}
+           </div>
+          </div>
+     </div>
+   
+  {{/each}}
+  </div>
+</div> 
+</template>
+
+
+<template name="Login">
+  <div id="userLogin">
+    <div class="control-group">
+      <label class="control-label" for="userName">Name:</label>
+        <div class="controls">
+        <input id="userName" class="input-xlarge" required name="userName" type="text"/>
+      </div>
+    </div>
+  	
+    <div class="control-group">
+      <label class="control-label" for="userPwd">Password:</label>
+      <div class="controls">
+        <input id="userPwd" type="password" required class="input-xlarge" name="userPwd"/> 
+      </div>  
+    </div>
+
+      <div class="form-actions">
+        <div id="signin" class="btn btn-primary">login</div>
+      </div>
+  </div>
+</template>
+
+<template name="logout">
+  {{#if currentUser}}
+    <div id="toout" class="btn btn-info">logout</div>
+  {{/if}}
+</template>
+
+<template name="register">
+    <div class="control-group">
+      <label class="control-label" for="registerName">Name:</label>
+       <div class="controls">
+         <input id="registerName" class="input-xlarge" required name="registerName" type="text" placeholder="unique name"/>
+       </div>
+    </div>
+
+    <div class="control-group">
+      <label class="col-sm-2 control-label" for="registerPwd">Password:</label>
+      <div class="controls">
+        <input id="registerPwd" type="password" required class="input-xlarge" name="registerPwd" placeholder="length >=6"/> 
+      </div>  
+    </div>
+
+    <div class="control-group">
+      <label class="col-sm-2 control-label" for="confirmPwd">Confirm Password</label>
+      <div class="controls">
+        <input id="confirmPwd" type="password" required class="input-xlarge" name="confirmPwd" placeholder="make sure pwd">
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="col-sm-2 control-label" for="registerEmail">Email:</label>
+      <div class="controls">
+        <input id="registerEmail" type="text" required class="input-xlarge" name="registerEmail" placeholder="legal email">
+      </div>
+    </div>
+
+      <div class="form-actions">
+        <div id="register" class="btn btn-primary">Register</div>
+      </div>
+</template>
+
+<template name="postMsg">
+  <form class="well form-inline center" style="text-align:center">
+    <input id="content" data-animation="sfsf" type="text" required class="span8 form-control" placeholder="length >= 6 && length <= 38">
+    <div id="post_Msg" class="btn btn-success"><i class="icon-comment icon-white"></i>Say</div>
+  </form>
+
+</template>

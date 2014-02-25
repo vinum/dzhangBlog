@@ -1,0 +1,42 @@
+#container{
+	text-align: center;
+}
+#cUser{
+	margin-top: 10px;
+	margin-left: 780px;
+	margin-right: auto;
+	text-align: center;
+	width: 42px;
+	height: 18px;
+}
+#userLogin{
+	margin-top: 80px;
+}
+#toout{
+	margin-left: 15px;
+	width: 39px;
+	height: 20px;
+}
+
+#userregister{
+	padding-top: 88px;
+	margin-left: 50px;
+	margin-right: auto;
+}
+#errinfo{
+	float:center;
+	margin-top: 48px;
+	margin-bottom: -86px;
+}
+
+#userloginmoudle{
+	margin-top: 85px;
+	margin-left: 50px;
+}
+
+#msgplace{
+	overflow-y:auto;
+	text-align: center;
+	height: 200px;
+	margin-bottom: 0px;
+}
